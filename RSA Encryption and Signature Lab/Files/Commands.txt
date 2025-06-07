@@ -1,0 +1,415 @@
+--> Background <--
+
+#include <stdio.h>
+#include <openssl/bn.h>
+
+// Print out a big number.							// 4 //
+void printBN(char *msg, BIGNUM *a){						//   //
+	// Convert the BIGNUM to number string					//   //
+	char * number_str = BN_bn2dec(a);					//   //
+										//   //
+	// Print out the number string						//   //
+	printf("%s %s\n", msg, number_str);					//   //
+										//   //
+	// Free the dynamically allocated memory				//   //
+	OPENSSL_free(number_str);						//   //
+}										//   //
+
+int main (){
+	// Creating BN_CTX structure to hold BIGNUM temporary variables.	// 1 //
+  	BN_CTX *ctx = BN_CTX_new();						//   //
+	
+	// Initialize a BIGNUM variable.					// 2 //
+  	BIGNUM *a = BN_new();							//   //
+	
+	// Assign a value from a decimal number string				// 3 //
+	BN_dec2bn(&a, "12345678901112231223");					//   //
+	printBN("Assign a value from a decimal number string :", a);		//   //
+										//   //
+	// Assign a value from a hex number string				//   //
+	BN_hex2bn(&a, "2A3B4C55FF77889AED3F");					//   //
+	printBN("Assign a value from a hex number string     :", a);		//   //
+										//   //
+	// Generate a random number of 128 bits					//   //
+	BN_rand(a, 128, 0, 0);							//   //
+	printBN("Generate a random number of 128 bits        :", a);		//   //
+										//   //
+	// Generate a random prime number of 128 bits				//   //
+	BN_generate_prime_ex(a, 128, 1, NULL, NULL, NULL);			//   //
+	printBN("Generate a random prime number of 128 bits  :", a);		//   //
+	
+	// Compute res = a − b and res = a + b:					// 5 //
+	BIGNUM *b = BN_new();							//   //
+	BIGNUM *res = BN_new();							//   //
+	BN_dec2bn(&a, "98765432101234567890");					//   //
+    	BN_dec2bn(&b, "11223344556677889900");					//   //
+    										//   //
+	BN_sub(res, a, b);							//   //
+	printBN("res = a - b =", res);						//   //
+    										//   //
+	BN_add(res, a, b);							//   //
+	printBN("res = a + b =", res);						//   //
+	
+	// Compute res = a ∗ b.							// 6 //
+	BN_mul(res, a, b, ctx);							//   //
+	printBN("res = a * b =", res);						//   //
+	
+	// Compute res = a ∗ b mod n:						// 7 //
+	BIGNUM *n = BN_new();							//   //
+	BN_rand(n, 128, 0, 0);							//   //
+	BN_mod_mul(res, a, b, n, ctx);						//   //
+	printBN("res = a ∗ b mod n =", res);					//   //
+	
+	// Compute res = a^c mod n:						// 8 //
+	BIGNUM *c = BN_new();							//   //
+	BN_dec2bn(&c, "12345678901234567890");					//   //
+	BN_mod_exp(res, a, c, n, ctx);						//   //
+  	printBN("res = a^c mod n =", res);					//   //
+	
+	// Compute modular inverse						// 9 //
+	BN_mod_inverse(b, a, n, ctx);						//   //
+	printBN("b = a^−1 mod n =", res);					//   //
+	
+  	return 0;
+}
+
+gcc BIGNUM_APIs.c -o BIGNUM_APIs -lcrypto
+./BIGNUM_APIs
+
+#include <stdio.h>
+#include <openssl/bn.h>
+
+#define NBITS 256
+
+void printBN(char *msg, BIGNUM * a){
+	// Use BN_bn2hex(a) for hex string
+	// Use BN_bn2dec(a) for decimal string
+   	char * number_str = BN_bn2hex(a);
+   	printf("%s %s\n", msg, number_str);
+   	OPENSSL_free(number_str);
+}
+
+int main (){
+  	BN_CTX *ctx = BN_CTX_new();
+
+	BIGNUM *a = BN_new();
+	BIGNUM *b = BN_new();
+	BIGNUM *n = BN_new();
+	BIGNUM *res = BN_new();
+
+	// Initialize a, b, n
+	BN_generate_prime_ex(a, NBITS, 1, NULL, NULL, NULL);
+	BN_dec2bn(&b, "273489463796838501848592769467194369268");
+	BN_rand(n, NBITS, 0, 0);
+
+	// res = a*b
+	BN_mul(res, a, b, ctx);
+	printBN("a * b = ", res);
+
+	// res = a^b mod n
+	BN_mod_exp(res, a, b, n, ctx);
+	printBN("a^c mod n = ", res);
+
+	return 0;
+}
+
+gcc bn_sample.c -o bn_sample -lcrypto
+./bn_sample
+
+
+--> 3.1 : Task 1 <--
+
+#include <stdio.h>
+#include <openssl/bn.h>
+
+void printBN(char *msg, BIGNUM *a) {
+    char *number_str = BN_bn2hex(a);
+    printf("%s %s\n", msg, number_str);
+    OPENSSL_free(number_str);
+}
+int main() {
+    BN_CTX *ctx = BN_CTX_new();
+    BIGNUM *p = BN_new(), *q = BN_new(), *e = BN_new(), *n = BN_new(), *d = BN_new(), *one = BN_new(), *phi = BN_new(), *result1 = BN_new(), *result2 = BN_new();
+    
+    BN_hex2bn(&p, "F7E75FDC469067FFDC4E847C51F452DF");
+    BN_hex2bn(&q, "E85CED54AF57E53E092113E62F436F4F");
+    BN_hex2bn(&e, "0D88C3");
+    BN_hex2bn(&one, "1");
+    
+    BN_mul(n, p, q, ctx);
+    printBN("n = p * q =", n);
+
+    BN_sub(result1, p, one);
+    BN_sub(result2, q, one);
+    BN_mul(phi, result1, result2, ctx);
+    printBN("ϕ(n) =", phi);
+
+    BN_mod_inverse(d, e, phi, ctx);
+    printBN("Private key d =", d);
+
+    BN_free(p);
+    BN_free(q);
+    BN_free(n);
+    BN_free(phi);
+    BN_free(e);
+    BN_free(d);
+    BN_free(one);
+    BN_CTX_free(ctx);
+    return 0;
+}
+
+gcc Task1.c -o Task1 -lcrypto
+./Task1
+
+
+--> 3.2 : Task 2 <--
+
+#include <stdio.h>
+#include <openssl/bn.h>
+#include <string.h>
+void printBN(char *msg, BIGNUM *a) {
+   	char *number_str = BN_bn2hex(a);
+    	printf("%s %s\n", msg, number_str);
+    	OPENSSL_free(number_str);
+}
+void hex_to_ascii(char *hex_string) {
+	char ascii_output[1024] = {0};
+	int length = strlen(hex_string);
+	for (int i = 0; i < length; i += 2) {
+        	char hex_pair[3] = {hex_string[i], hex_string[i + 1], '\0'};
+        	int ascii_char;
+        	sscanf(hex_pair, "%x", &ascii_char);
+        	ascii_output[i / 2] = (char)ascii_char;
+    	}
+    	printf("Decrypted ASCII String: %s\n", ascii_output);
+}
+int main() {
+	BN_CTX *ctx = BN_CTX_new();
+    	BIGNUM *n = BN_new(), *e = BN_new(), *M = BN_new(), *d = BN_new(), *enc_result = BN_new(), *dec_result = BN_new();
+    	BN_hex2bn(&n, "DCBFFE3E51F62E09CE7032E2677A78946A849DC4CDDE3A4D0CB81629242FB1A5");
+    	BN_hex2bn(&e, "010001");
+    	BN_hex2bn(&M, "4120746f702073656372657421");
+    	BN_hex2bn(&d, "74D806F9F3A62BAE331FFE3F0A68AFE35B3D2E4794148AACBC26AA381CD7D30D");
+    	BN_mod_exp(enc_result, M, e, n, ctx);
+    	printBN("Encrypted Message =", enc_result);
+    	
+    	printf("--> Verifying Encryption Result <--\n");
+    	BN_mod_exp(dec_result, enc_result, d, n, ctx);
+    	printBN("Decrypted Message =", dec_result);
+	
+	char *decrypted_hex = BN_bn2hex(dec_result);
+    	hex_to_ascii(decrypted_hex);
+    	OPENSSL_free(decrypted_hex);
+    	BN_free(n);
+    	BN_free(e);
+    	BN_free(M);
+	BN_free(d);
+    	BN_free(enc_result);
+    	BN_free(dec_result);
+    	BN_CTX_free(ctx);
+    	return 0;
+}
+
+python3 -c 'print("A top secret!".encode("utf-8").hex())'
+gcc Task2.c -o Task2 -lcrypto
+./Task2
+
+
+--> 3.3 : Task 3 <--
+
+#include <stdio.h>
+#include <openssl/bn.h>
+#include <string.h>
+
+void printBN(char *msg, BIGNUM *a) {
+   	char *number_str = BN_bn2hex(a);
+    	printf("%s %s\n", msg, number_str);
+    	OPENSSL_free(number_str);
+}
+
+void hex_to_ascii(char *hex_string) {
+	char ascii_output[1024] = {0};
+	int length = strlen(hex_string);
+	for (int i = 0; i < length; i += 2) {
+        	char hex_pair[3] = {hex_string[i], hex_string[i + 1], '\0'};
+        	int ascii_char;
+        	sscanf(hex_pair, "%x", &ascii_char);
+        	ascii_output[i / 2] = (char)ascii_char;
+    	}
+    	printf("Decrypted ASCII String: %s\n", ascii_output);
+}
+int main() {
+	BN_CTX *ctx = BN_CTX_new();
+    	BIGNUM *n = BN_new(), *d = BN_new(), *enc_result = BN_new(), *dec_result = BN_new();
+    	
+    	BN_hex2bn(&n, "DCBFFE3E51F62E09CE7032E2677A78946A849DC4CDDE3A4D0CB81629242FB1A5");
+    	BN_hex2bn(&d, "74D806F9F3A62BAE331FFE3F0A68AFE35B3D2E4794148AACBC26AA381CD7D30D");
+    	BN_hex2bn(&enc_result, "8C0F971DF2F3672B28811407E2DABBE1DA0FEBBBDFC7DCB67396567EA1E2493F");
+    	
+    	BN_mod_exp(dec_result, enc_result, d, n, ctx);
+    	printBN("Decrypted Message =", dec_result);
+	
+	char *decrypted_hex = BN_bn2hex(dec_result);
+    	hex_to_ascii(decrypted_hex);
+    	
+    	OPENSSL_free(decrypted_hex);
+    	BN_free(n);
+    	BN_free(d);
+    	BN_free(enc_result);
+    	BN_free(dec_result);
+    	BN_CTX_free(ctx);
+    	return 0;
+}
+
+gcc Task3.c -o Task3 -lcrypto
+./Task3
+python3 -c 'print(bytes.fromhex("50617373776F72642069732064656573").decode("utf-8"))'
+
+
+--> 3.4 : Task 4 <--
+
+#include <stdio.h>
+#include <openssl/bn.h>
+#include <openssl/rsa.h>
+#include <string.h>
+
+void printBN(char *msg, BIGNUM *a) {
+	char *number_str = BN_bn2hex(a);
+	printf("%s %s\n", msg, number_str);
+	OPENSSL_free(number_str);
+}
+
+void signMessage(BIGNUM *d, BIGNUM *n, char *message, BIGNUM *signature, BN_CTX *ctx) {
+	BIGNUM *m = BN_new();
+	BN_bin2bn((unsigned char*)message, strlen(message), m);
+	BN_mod_exp(signature, m, d, n, ctx);
+	BN_free(m);
+}
+
+int main() {
+	BN_CTX *ctx = BN_CTX_new();
+	BIGNUM *n = BN_new(), *d = BN_new(), *signature = BN_new();
+	BN_hex2bn(&n, "DCBFFE3E51F62E09CE7032E2677A78946A849DC4CDDE3A4D0CB81629242FB1A5");
+	BN_hex2bn(&d, "74D806F9F3A62BAE331FFE3F0A68AFE35B3D2E4794148AACBC26AA381CD7D30D");
+
+	printf("Original Message: I owe you $2000.\n");
+	signMessage(d, n, "I owe you $2000.", signature, ctx);
+	printBN("Signature for Original Message:", signature);
+
+	printf("Modified Message: I owe you $3000.\n");
+	signMessage(d, n, "I owe you $3000.", signature, ctx);
+	printBN("Signature for Modified Message:", signature);
+
+	BN_free(n);
+	BN_free(d);
+	BN_free(signature);
+	BN_CTX_free(ctx);
+	return 0;
+}
+
+gcc Task4.c -o Task4 -lcrypto
+./Task4
+
+
+--> 3.5 : Task 5 <--
+
+#include<stdio.h>
+#include<openssl/bn.h>
+#include <string.h>
+
+char *hex_to_ascii(char *hex_string) {
+    static char ascii_output[1024] = {0};
+    int length = strlen(hex_string);
+    for (int i = 0; i < length; i += 2) {
+        char hex_pair[3] = {hex_string[i], hex_string[i + 1], '\0'};
+        int ascii_char;
+        sscanf(hex_pair, "%x", &ascii_char);
+        ascii_output[i / 2] = (char)ascii_char;
+    }
+    return ascii_output;
+}
+
+int main(){
+	BN_CTX *ctx = BN_CTX_new();
+	BIGNUM *M = BN_new(), *S1 = BN_new(), *S2 = BN_new(), *e = BN_new(), *n = BN_new();
+	
+	BN_hex2bn(&S1,"643D6F34902D9C7EC90CB0B2BCA36C47FA37165C0005CAB026C0542CBDB6802F");
+	BN_hex2bn(&S2,"643D6F34902D9C7EC90CB0B2BCA36C47FA37165C0005CAB026C0542CBDB6803F");
+	BN_hex2bn(&e,"010001");
+	BN_hex2bn(&n,"AE1CD4DC432798D933779FBD46C6E1247F0CF1233595113AA51B450F18116115");
+	
+	BN_mod_exp(M, S1, e, n, ctx);
+	printf("Message from Original Signature: %s", BN_bn2hex(M));
+	printf("\nASCII Message: %s\n", hex_to_ascii(BN_bn2hex(M)));
+
+	BN_mod_exp(M, S2, e, n, ctx);
+	printf("\nMessage from Corrupted Signature: %s\n", BN_bn2hex(M));
+	printf("ASCII Message:\n");
+	printf("%s\n", hex_to_ascii(BN_bn2hex(M)));
+	
+	BN_free(M);
+	BN_free(S1);
+	BN_free(S2);
+	BN_free(e);
+	BN_free(n);
+	BN_CTX_free(ctx);
+	return 0;
+}
+
+python3 -c 'print("Launch a missile.".encode("utf-8").hex())'
+gcc Task5.c -o Task5 -lcrypto
+./Task5
+ 
+
+--> 3.6 : Task 6 <--
+
+openssl s_client -connect gnupg.org:443 -showcerts
+cat c0.pem
+cat c1.pem
+
+openssl x509 -in c1.pem -noout -modulus
+openssl x509 -in c1.pem -text -noout | grep Exponent
+
+openssl x509 -in c0.pem -text -noout
+gedit signature
+cat signature | tr -d '[:space:]:-' | tr 'a-z' 'A-Z' && echo
+
+openssl asn1parse -i -in c0.pem
+openssl asn1parse -i -in c0.pem -strparse 4 -out c0_body.bin -noout
+sha256sum c0_body.bin | tr 'a-z' 'A-Z'
+
+#include <stdio.h>
+#include <openssl/bn.h>
+
+void printBN(char *msg, BIGNUM *a){
+	char *number_str_a = BN_bn2hex(a);
+	printf("%s %s\n", msg, number_str_a);
+	OPENSSL_free(number_str_a);
+}
+
+int main(){
+	BN_CTX *ctx = BN_CTX_new();
+	BIGNUM *n = BN_new();
+	BIGNUM *e = BN_new();
+	BIGNUM *C = BN_new();
+	BIGNUM *S = BN_new();
+
+	BN_hex2bn(&n,
+	"CF57E5E6C45412EDB447FEC92758764650288C1D3E88DF059DD5B51829BDDDB55ABFFAF6CEA3BEAF00214B625A5A3C012FC55803F689FF8E1143EBC1B5E01407968F6F1FD7E7BA8139097565B7C2AF185B372628E7A3F4072B6D1AFFAB58BC95AE40FFE9CB57C4B55B7F780D1861BC17E754C6BB4991CD6E18D18085EEA66536BC74EABC504CEAFC21F338169394BAB0D36B3806CD16127ACA5275C8AD76B2C29C5D98455C6F617BC62DEE3C13528601D957E6381CDF8DB51F92919AE74A1CCC45A87255F0B0E6A307ECFDA71B669E3F488B71847158C93AFAEF5EF25B442B3C74E78FB247C1076ACD9AB70D96F712812651540AEC61F6F7F5E2F28AC8950D8D");
+	BN_dec2bn(&e, "65537");
+	BN_hex2bn(&S,
+	"B2BFB8A750A2C70106400C66FFA7EC278A3575D6C5078865B77EBFA4586656665C35B6D0634E7FDB794838158372C8F805F5E0EB0745A4E09160D29387E5BBDEB9E0ADA146AADEBD8767609B893D8D9863D6734E182D4AC4409B925A6536E9065DC52EE41AFC8DF24DC5F398066890606F62EEB9F3EC304342428757ADBEBDC2D8AC77E8912090DD843C33DD161B9A84072ACB5E7A24AF95BE7958B7CE836883EBA7BF33E838D96FCC3BE3CDB708EDA10F39A592C468A6F7B38031B52D140205E1D28BA31857E6D65B651F78AFBE303BF9FEC58B4E7B367A29A4C5417FD312C7F19FCE75683B0108685E8E2F4DCEE593F4F4E41D80ACC5C34FF7AD8BC046CC68");
+
+	BN_mod_exp(C, S, e, n, ctx);
+	printBN("\nResult =", C);
+	printf("\nHash = 0A605944C58946EEC33FA9CBB23BD394FC4F82A9C0613E50893DBE851362540E\n\n");
+	
+	BN_clear_free(n);
+	BN_clear_free(e);
+	BN_clear_free(C);
+	BN_clear_free(S);
+	return 0;
+}
+
+gcc verify_signature.c -o verify_signature -lcrypto
+./verify_signature

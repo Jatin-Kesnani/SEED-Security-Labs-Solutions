@@ -1,0 +1,365 @@
+--> Lab Environment <--
+
+$ docker-compose build
+$ docker-compose up
+$ docker ps --format "{{.ID}} {{.Names}}"
+$ docker exec -it <container_id> /bin/bash
+$ docker-compose down
+
+
+--> Task 1: Frequency Analysis <--
+
+tr ’nyv’ ’ETA’ < ciphertext.txt > plaintext.txt
+tr ’nyvt’ ’ETAH’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrx’ ’ETAHGO’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxl’ ’ETAHGOW’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbu’ ’ETAHGOWFN’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbui’ ’ETAHGOWFNL’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqph’ ’ETAHGOWFNLSDR’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqpham’ ’ETAHGOWFNLSDRCI’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamsz’ ’ETAHGOWFNLSDRCIKU’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamszgc’ ’ETAHGOWFNLSDRCIKUBM’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamszgcdk’ ’ETAHGOWFNLSDRCIKUBMYX’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamszgcdkej’ ’ETAHGOWFNLSDRCIKUBMYXPQ’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamszgcdkejfo’ ’ETAHGOWFNLSDRCIKUBMYXPQVJ’ < ciphertext.txt > plaintext.txt
+tr ’nyvtrxlbuiqphamszgcdkejfow’ ’ETAHGOWFNLSDRCIKUBMYXPQVJZ’ < ciphertext.txt > plaintext.txt
+
+
+tr 'yt' 'TH' < ciphertext.txt > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' | tr 'id' 'LY' | tr 'en' 'PE' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' | tr 'id' 'LY' | tr 'en' 'PE' | tr 'ur' 'NG' | tr 'lv' 'WA' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' | tr 'id' 'LY' | tr 'en' 'PE' | tr 'ur' 'NG' | tr 'lv' 'WA' | tr 'xb' 'OF' | tr 'sn' 'KE' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' | tr 'id' 'LY' | tr 'en' 'PE' | tr 'ur' 'NG' | tr 'lv' 'WA' | tr 'xb' 'OF' | tr 'sn' 'KE' | tr 'jz' 'QU' | tr 'nk' 'EX' > plaintext.txt
+tr 'yt' 'TH' < ciphertext.txt | tr 'tn' 'HE' | tr 'mu' 'IN' | tr 'nh' 'ER' | tr 'vh' 'AR' | tr 'nq' 'ES' | tr 'xu' 'ON' | tr 'up' 'ND' | tr 'vi' 'AL' | tr 'gn' 'BE' | tr 'av' 'CA' | tr 'fn' 'VE' | tr 'cn' 'ME' | tr 'id' 'LY' | tr 'en' 'PE' | tr 'ur' 'NG' | tr 'lv' 'WA' | tr 'xb' 'OF' | tr 'sn' 'KE' | tr 'jz' 'QU' | tr 'nk' 'EX' | tr 'oz' 'JU' > plaintext.txt
+
+
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' | tr 'avh' 'CAR' | tr 'cxf' 'MOV' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' | tr 'avh' 'CAR' | tr 'cxf' 'MOV' | tr 'ehn' 'PRE' | tr 'iid' 'LLY' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' | tr 'avh' 'CAR' | tr 'cxf' 'MOV' | tr 'ehn' 'PRE' | tr 'iid' 'LLY' | tr 'cvs' 'MAK' | tr 'njz' 'EQU' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' | tr 'avh' 'CAR' | tr 'cxf' 'MOV' | tr 'ehn' 'PRE' | tr 'iid' 'LLY' | tr 'cvs' 'MAK' | tr 'njz' 'EQU' | tr 'kyh' 'XTR' | tr 'ozq' 'JUS' > plaintext.txt
+tr 'ytn' 'THE' < ciphertext.txt | tr 'vup' 'AND' | tr 'mur' 'ING' | tr 'ynh' 'TER' | tr 'xzy' 'OUT' | tr 'mxu' 'ION' | tr 'gnq' 'BES' | tr 'vii' 'ALL' | tr 'bxh' 'FOR' | tr 'lvq' 'WAS' | tr 'cmu' 'MIN' | tr 'avh' 'CAR' | tr 'cxf' 'MOV' | tr 'ehn' 'PRE' | tr 'iid' 'LLY' | tr 'cvs' 'MAK' | tr 'njz' 'EQU' | tr 'kyh' 'XTR' | tr 'ozq' 'JUS' | tr 'mwn' 'IZE' > plaintext.txt
+
+
+
+
+--> Task 2: Encryption using Different Ciphers and Modes <--
+
+cat plain.txt
+openssl enc -aes-128-cbc -e -in plain.txt -out cipher.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+cat cipher.txt; echo
+openssl enc -aes-128-cbc -d -in cipher.txt -out newplain.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+cat newplain.txt
+
+
+cat plain.txt
+openssl enc -bf-cbc -e -in plain.txt -out cipher.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708
+cat cipher.txt; echo
+openssl enc -bf-cbc -d -in cipher.txt -out newplain.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708
+cat newplain.txt
+
+
+cat plain.txt
+openssl enc -aes-128-cfb -e -in plain.txt -out cipher.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+cat cipher.txt; echo
+openssl enc -aes-128-cfb -d -in cipher.txt -out newplain.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+cat newplain.txt
+
+
+--> Task 3: Encryption Mode – ECB vs. CBC <--
+
+openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_ecb.bmp -K 00112233445566778889aabbccddeeff
+openssl enc -aes-128-cbc -e -in pic_original.bmp -out pic_cbc.bmp -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+head -c 54 pic_original.bmp > header
+tail -c +55 pic_ecb.bmp > body_ecb
+tail -c +55 pic_cbc.bmp > body_cbc
+cat header body_ecb > pic_ecb_corrected.bmp
+cat header body_cbc > pic_cbc_corrected.bmp
+
+
+openssl enc -aes-128-ecb -e -in deer.bmp -out deer_ecb.bmp -K 00112233445566778889aabbccddeeff
+openssl enc -aes-128-cbc -e -in deer.bmp -out deer_cbc.bmp -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+head -c 54 deer.bmp > header
+tail -c +55 deer_ecb.bmp > body_ecb
+tail -c +55 deer_cbc.bmp > body_cbc
+cat header body_ecb > deer_ecb_corrected.bmp
+cat header body_cbc > deer_cbc_corrected.bmp
+
+
+--> Task 4: Padding <--
+
+echo -n "12345" > f1.txt
+echo -n "1234567890" > f2.txt
+echo -n "1234567812345678" > f3.txt
+
+openssl enc -aes-128-cbc -e -in f1.txt -out f1_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+openssl enc -aes-128-cbc -e -in f2.txt -out f2_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+openssl enc -aes-128-cbc -e -in f3.txt -out f3_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+
+stat --format=%s f1_enc.txt
+stat --format=%s f2_enc.txt
+stat --format=%s f3_enc.txt
+
+openssl enc -aes-128-cbc -d -in f1_enc.txt -out f1_dec_nopad.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10 -nopad
+openssl enc -aes-128-cbc -d -in f2_enc.txt -out f2_dec_nopad.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10 -nopad
+openssl enc -aes-128-cbc -d -in f3_enc.txt -out f3_dec_nopad.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10 -nopad
+
+hexdump -C f1_dec_nopad.txt
+hexdump -C f2_dec_nopad.txt
+hexdump -C f3_dec_nopad.txt
+
+
+--> Task 5: Error Propagation – Corrupted Cipher Text <--
+
+yes "This is a sample text to create a file with more than 1000 bytes" | head -c 1000 > ecb_file.txt
+stat --format=%s ecb_file.txt
+openssl enc -aes-128-ecb -e -in ecb_file.txt -out ecb_file_enc.txt -K 00112233445566778889aabbccddeeff
+openssl enc -aes-128-ecb -d -in ecb_file_enc.txt -out ecb_file_dec.txt -K 00112233445566778889aabbccddeeff
+
+yes "This is a sample text to create a file with more than 1000 bytes" | head -c 1000 > cbc_file.txt
+stat --format=%s cbc_file.txt
+openssl enc -aes-128-cbc -e -in cbc_file.txt -out cbc_file_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+openssl enc -aes-128-cbc -d -in cbc_file_enc.txt -out cbc_file_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+
+yes "This is a sample text to create a file with more than 1000 bytes" | head -c 1000 > cfb_file.txt
+stat --format=%s cfb_file.txt
+openssl enc -aes-128-cfb -e -in cfb_file.txt -out cfb_file_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+openssl enc -aes-128-cfb -d -in cfb_file_enc.txt -out cfb_file_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+
+yes "This is a sample text to create a file with more than 1000 bytes" | head -c 1000 > ofb_file.txt
+stat --format=%s ofb_file.txt
+openssl enc -aes-128-ofb -e -in ofb_file.txt -out ofb_file_enc.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+openssl enc -aes-128-ofb -d -in ofb_file_enc.txt -out ofb_file_dec.txt -K 00112233445566778889aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f10
+
+
+--> Task 6: Initial Vector (IV) and Common Mistakes <--
+
+cat part1.txt
+openssl enc -aes-128-cbc -e -in part1.txt -out part1_enc1.txt -K 1f5b0146fffd727a2a2b3b37f4c43fa9 -iv 88eb7ef68cae7442416d4bb5597fda80
+cat part1_enc1.txt; echo
+openssl enc -aes-128-cbc -e -in part1.txt -out part1_enc2.txt -K 1f5b0146fffd727a2a2b3b37f4c43fa9 -iv 2b055d5e81f4ebd981f20382e22f1510
+cat part1_enc2.txt; echo
+cat part1.txt
+openssl enc -aes-128-cfb -e -in part1.txt -out part1_enc1.txt -K 1f5b0146fffd727a2a2b3b37f4c43fa9 -iv 88eb7ef68cae7442416d4bb5597fda80
+cat part1_enc1.txt; echo
+openssl enc -aes-128-cfb -e -in part1.txt -out part1_enc2.txt -K 1f5b0146fffd727a2a2b3b37f4c43fa9 -iv 88eb7ef68cae7442416d4bb5597fda80
+cat part1_enc2.txt; echo
+
+cat sample_code.py
+#!/usr/bin/python3
+def xor(first, second):
+   return bytearray(x^y for x,y in zip(first, second))
+MSG   = "This is a known message!"
+HEX_1 = "a469b1c502c1cab966965e50425438e1bb1b5f9037a4c159"
+HEX_2 = "bf73bcd3509299d566c35b5d450337e1bb175f903fafc159"
+D1 = bytes(MSG, 'utf-8')
+D2 = bytearray.fromhex(HEX_1)
+D3 = bytearray.fromhex(HEX_2)
+r1 = xor(D1, D2)
+r2 = xor(r1, D3)
+print(r2.decode('utf-8'))
+python3 sample_code.py
+
+dcup
+nc 10.9.0.80 3000
+
+
+--> Task 7: Programming using the Crypto Library <--
+
+#include <openssl/aes.h>
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+#include <stdlib.h>
+
+#define charMaxLeng 20
+
+unsigned char AscToHex(unsigned char Char) {
+    int aChar = (int) Char;
+    if ((aChar >= 0x30) && (aChar <= 0x39))
+        aChar -= 0x30;
+    else if ((aChar >= 0x41) && (aChar <= 0x46))
+        aChar -= 0x37;
+    else if ((aChar >= 0x61) && (aChar <= 0x66))
+        aChar -= 0x57;
+    else
+        aChar = 0xff;
+    return aChar;
+}
+
+unsigned char HexToAsc(unsigned char aHex) {
+    if ((aHex >= 0) && (aHex <= 9))
+        aHex += 0x30;
+    else if ((aHex >= 10) && (aHex <= 15))
+        aHex += 0x37;
+    else
+        aHex = 0xff;
+    return aHex;
+}
+
+unsigned char* str2hex(char *str) {
+    unsigned char *ret = NULL;
+    int str_len = strlen(str);
+    int i = 0;
+    assert((str_len % 2) == 0);
+    ret = (char *) malloc(str_len / 2);
+    for (i = 0; i < str_len; i = i + 2) {
+        sscanf(str + i, "%2hhx", &ret[i / 2]);
+    }
+    return ret;
+}
+
+char *padding_buf(char *buf, int size, int *final_size) {
+    char *ret = NULL;
+    int padding_size = AES_BLOCK_SIZE - (size % AES_BLOCK_SIZE);
+    int i;
+    *final_size = size + padding_size;
+    ret = (char *) malloc(size + padding_size);
+    memcpy(ret, buf, size);
+    if (padding_size != 0) {
+        for (i = size; i < (size + padding_size); i++) {
+            ret[i] = padding_size;
+        }
+    }
+    return ret;
+}
+
+void printf_buff(char *buff, int size) {
+    int i = 0;
+    for (i = 0; i < size; i++) {
+        printf("%02X", (unsigned char) buff[i]);
+    }
+    printf("\n");
+}
+
+void encrypt_buffer(char *raw_buf, char **encrypted_output, int len, char* kkey) {
+    AES_KEY aes;
+    unsigned char *key = str2hex(kkey);
+    unsigned char *iv = str2hex("aabbccddeeff00998877665544332211");
+    AES_set_encrypt_key(key, 128, &aes);
+    AES_cbc_encrypt(raw_buf, *encrypted_output, len, &aes, iv, AES_ENCRYPT);
+    free(key);
+    free(iv);
+}
+
+void decrypt_buf(char *raw_buf, char **decrypt_buf, int len, char* kkey) {
+    AES_KEY aes;
+    unsigned char *key = str2hex(kkey);
+    unsigned char *iv = str2hex("aabbccddeeff00998877665544332211");
+    AES_set_decrypt_key(key, 128, &aes);
+    AES_cbc_encrypt(raw_buf, *decrypt_buf, len, &aes, iv, AES_DECRYPT);
+    free(key);
+    free(iv);
+}
+
+int main(int argc, char* argv[]) {
+    char* target = "764AA26B55A4DA654DF6B19E4BCE00F4ED05E09346FB0E762583CB7DA2AC93A2";
+    FILE* p = NULL;
+
+    if ((p = fopen("words.txt", "r")) == NULL) {
+        printf("ERROR\n");
+        return 1;
+    }
+
+    char buffer[charMaxLeng];
+    char buf2[charMaxLeng];
+    int flag = 0;
+
+    while (!feof(p)) {
+        int i = 0;
+        memset(buffer, '\0', charMaxLeng * sizeof(char));
+        memset(buf2, '\0', charMaxLeng * sizeof(char));
+        fgets(buffer, charMaxLeng, p);
+
+        while (i < charMaxLeng) {
+            buf2[i] = buffer[i];
+            i += 1;
+        }
+
+        size_t len = strlen(buffer);
+        if (len == 1) continue;
+
+        char *raw_buf = NULL;
+        char *after_padding_buf = NULL;
+        int padding_size = 0;
+        char *encrypted_output = NULL;
+        char *decrypt_buf = NULL;
+
+        i = 0;
+        unsigned char* key = NULL;
+        key = (unsigned char*) malloc(33);
+
+        while (i < strlen(buffer)) {
+            unsigned char letter = buffer[i];
+            key[2 * i] = HexToAsc(letter / 0x10);
+            key[2 * i + 1] = HexToAsc(letter % 0x10);
+            ++i;
+            if (i == 0x0f || buffer[i] < 0x20) break;
+        }
+
+        while (i < 0x10) {
+            key[2 * i] = '2';
+            key[2 * i + 1] = '3';
+            ++i;
+        }
+
+        key[0x20] = '\0';
+        raw_buf = (char *) malloc(21);
+        memcpy(raw_buf, "This is a top secret.", 21);
+
+        after_padding_buf = padding_buf(raw_buf, 21, &padding_size);
+        encrypted_output = (char *) malloc(padding_size);
+
+        encrypt_buffer(after_padding_buf, &encrypted_output, padding_size, key);
+
+        i = 0;
+        char temp = '\0';
+        flag = 1;
+
+        while (i < padding_size) {
+            temp = HexToAsc((unsigned char) encrypted_output[i] / 0x10);
+            if (temp != target[2 * i]) {
+                flag = 0;
+                break;
+            }
+            temp = HexToAsc((unsigned char) encrypted_output[i] % 0x10);
+            if (temp != target[2 * i + 1]) {
+                flag = 0;
+                break;
+            }
+            i += 1;
+        }
+
+        if (flag == 0) {
+            continue;
+        }
+
+        printf("%s", buf2);
+        printf_buff(encrypted_output, padding_size);
+        printf("%s\n", target);
+
+        free(raw_buf);
+        free(after_padding_buf);
+        free(encrypted_output);
+        free(decrypt_buf);
+        break;
+    }
+
+    fclose(p);
+    return 0;
+}
+
+gcc -o myenc myenc.c -lcrypto
+./myenc

@@ -1,0 +1,73 @@
+--> Task 1: Becoming a Certificate Authority (CA) <--
+
+cp /usr/lib/ssl/openssl.cnf ./openssl.cnf
+mkdir -p demoCA/certs demoCA/crl demoCA/newcerts
+touch demoCA/index.txt
+echo 1000 > demoCA/serial
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -keyout ca.key -out ca.crt
+openssl x509 -in ca.crt -text -noout
+openssl rsa -in ca.key -text -noout
+
+
+--> Task 2: Generating a Certificate Request for Your Web Server <--
+
+openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.kesnani2024.com/O=Kesnani2024 Inc./C=PK" -passout pass:dees
+openssl req -in server.csr -text -noout
+openssl rsa -in server.key -text -noout
+openssl req -newkey rsa:2048 -sha256 -keyout server.key -out server.csr -subj "/CN=www.kesnani2024.com/O=Kesnani2024 Inc./C=PK" -passout pass:dees -addext "subjectAltName = DNS:www.kesnani2024.com, DNS:www.kesnani2024A.com, DNS:www.kesnani2024B.com"
+
+
+--> Task 3: Generating a Certificate for your server <--
+
+openssl ca -config openssl.cnf -policy policy_anything -md sha256 -days 3650 -in server.csr -out server.crt -batch -cert ca.crt -keyfile ca.key
+openssl x509 -in server.crt -text -noout
+
+
+--> Task 4: Deploying Certificate in an Apache-Based HTTPS Website <--
+
+dcup
+
+dockps
+docksh 0f
+ls volumes/
+cp volumes/ca.crt certs
+cp volumes/ca.key certs
+cp volumes/server.key certs
+cp volumes/server.crt certs
+ls certs/
+ls var/www/kesnani2024/
+ls etc/apache2/sites-available/
+cat etc/apache2/sites-available/kesnani_apache_ssl.conf
+
+cd etc/apache2/sites-available/
+a2ensite kesnani_apache_ssl.conf 
+service apache2 start
+
+
+--> Task 5: Launching a Man-In-The-Middle Attack <--
+
+sudo gedit /etc/hosts
+nano kesnani_apache_ssl.conf
+nano kesnani_apache_ssl.conf
+service apache2 restart
+
+
+--> Task 6: Launching a Man-In-The-Middle Attack with a Compromised CA <--
+
+cp server.key facebook.key
+openssl req -new -key facebook.key -out facebook.csr -config openssl.cnf
+openssl ca -in facebook.csr -out facebook.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
+
+dcup
+
+dockps
+docksh 0f
+ls volumes/
+cp volumes/facebook.key certs
+cp volumes/facebook.crt certs
+ls certs/
+cat etc/apache2/sites-available/kesnani_apache_ssl.conf
+
+cd etc/apache2/sites-available/
+a2ensite kesnani_apache_ssl.conf 
+service apache2 start
